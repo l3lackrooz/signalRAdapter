@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  kent_socket_adapter:
+    build:
+      context: .
+      dockerfile: dev.Dockerfile
+    image: kent_socket_adapter
+    container_name: kentSocketAdapter
+    hostname: kentSocketAdapter
+    restart: unless-stopped
+    ports:
+      - "3085:3085"
+    environment:
+      - REDIS_URL=redis://redis:6379
+    networks:
+      - dev_net
+networks:
+  dev_net:
+    external: true
